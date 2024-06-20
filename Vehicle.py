@@ -23,8 +23,8 @@ class Vehicle:
         print(f"Владелец: {self.owner}")
     def set_color(self,new_color):
         vcol= False
-        for i in self.__COLOR_VARIANTS.items:
-            if upper(new_color)==upper(i):
+        for i in self.__COLOR_VARIANTS:
+            if new_color.upper()==i.upper():
                 vcol= True
         if vcol:
             self.__color= new_color
