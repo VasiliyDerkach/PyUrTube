@@ -97,13 +97,24 @@ class UrTube:
                         i.time_now=0
         else:
             print("Войдите в аккаунт, чтобы смотреть видео")
+    def __contains__(self, item):
+        if type(item)=='__main__.Video':
+            for i in self.videos.items:
+                if i.title == item.title:
+                    return True
+        elif type(item)=='__main__.User':
+            for i in self.users.items:
+                if i == item:
+                    return True
+
+        return False
 
 
 if __name__ == '__main__':
     ur = UrTube()
     v1 = Video('Лучший язык программирования 2024 года', 200)
     v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
-
+    print((type(v1)))
     # Добавление видео
     ur.add(v1, v2)
 
