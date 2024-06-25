@@ -30,12 +30,13 @@ class Figure:
         if self.__is_valid_sides( *args):
             if isinstance(self,Cube):
                 for i in range(1,12):
-                    self.__sides[i-1] = args[0]
+                    self.__sides.append(args[0])
             else:
-                self.__sides = args
+                for u in args:
+                    self.__sides.append(u)
         else:
             for i in range(1,self.sides_count):
-                self.__sides[i-1] = 1
+                self.__sides.append(1)
     def __len__(self):
         perim= 0
         for y in self.__sides:
@@ -79,26 +80,26 @@ class Cube(Figure):
         self.set_params(color,*args)
     def get_volume(self):
         t_sides= self.get_sides()
-        return self.t_sides[0]*self.t_sides[0]*self.t_sides[0]
+        return t_sides[0]*t_sides[0]*t_sides[0]
 
 if __name__=='__main__':
     circle1 = Circle((200, 200, 100), 10)  # (Цвет, стороны)
-    #cube1 = Cube((222, 35, 130), 6)
+    cube1 = Cube((222, 35, 130), 6)
 
     # Проверка на изменение цветов:
     circle1.set_color(55, 66, 77)  # Изменится
-    #cube1.set_color(300, 70, 15)  # Не изменится
+    cube1.set_color(300, 70, 15)  # Не изменится
     print(circle1.get_color())
-    #print(cube1.get_color())
+    print(cube1.get_color())
 
     # Проверка на изменение сторон:
-    #cube1.set_sides(5, 3, 12, 4, 5)  # Не изменится
+    cube1.set_sides(5, 3, 12, 4, 5)  # Не изменится
     circle1.set_sides(15)  # Изменится
-    #print(cube1.get_sides())
+    print(cube1.get_sides())
     print(circle1.get_sides())
 
     # Проверка периметра (круга), это и есть длина:
     print(len(circle1))
 
     # Проверка объёма (куба):
-    #print(cube1.get_volume())
+    print(cube1.get_volume())
