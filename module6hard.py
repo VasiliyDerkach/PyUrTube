@@ -13,7 +13,10 @@ class Figure:
     def get_sides(self):
         return self.__sides
     def __is_valid_color(self,r, g, b):
-        return True if (0>= r >=255) and (0>= g >=255) and (0>= b >=255) else False
+        if (r>=0) and (g>=0) and (b >=0) and (r <= 255) and (g <= 255) and (b <= 255):
+            return True
+        else:
+            return False
     def set_color(self, r, g, b):
         if self.__is_valid_color(r, g, b):
             self.__color = [r, g, b]
@@ -29,16 +32,20 @@ class Figure:
             return False
 
     def set_sides(self, *args):
+        t_sides=[]
         if self.__is_valid_sides( *args):
             if isinstance(self,Cube):
-                for i in range(1,12):
-                    self.__sides.append(args[0])
+                for i in range(0,12):
+                    t_sides.append(args[0])
             else:
                 for u in args:
-                    self.__sides.append(u)
+                    t_sides.append(u)
+            self.__sides= t_sides
         else:
-            for i in range(0,self.sides_count):
-                self.__sides.append(1)
+            if self.__sides==[]:
+                for i in range(0,self.sides_count):
+                    t_sides.append(1)
+                self.__sides= t_sides
     def __len__(self):
         perim= 0
         for y in self.__sides:
@@ -70,11 +77,15 @@ class Triangle(Figure):
         t_sides= self.get_sides()
         d = pperim
         for i in range(1,3):
-            d*= (pperim-self.t_sides[i-1])
+            d*= (pperim-t_sides[i-1])
 
-        self.__height = 2 * math.sqrt(d)/self.t_sides[0]
+        self.__height = 2 * math.sqrt(d)/t_sides[0]
     def get_square(self):
-        return self.__height*self.t_sides[0]/2
+        t_sides = self.get_sides()
+        return self.__height*t_sides[0]/2
+    def get_height(self):
+        return self.__height
+
 class Cube(Figure):
     def __init__(self, color, *args):
         super().__init__()
@@ -105,3 +116,10 @@ if __name__=='__main__':
 
     # Проверка объёма (куба):
     print(cube1.get_volume())
+    print('Тестирование треугольника')
+    trian= Triangle((200, 200, 100), 10, 6)
+    print(trian.get_sides())
+    trian1= Triangle((200, 200, 100), 10, 6, 8)
+    print(trian1.get_sides())
+    print(trian1.get_square())
+    print(trian1.get_height())
