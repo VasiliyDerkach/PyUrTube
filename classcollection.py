@@ -1,6 +1,6 @@
 class Vehicle:
     def __init__(self):
-        self.vehicle_type = "none"
+        self.vehicle_type = None
 
 class Car:
     def __init__(self):
@@ -15,10 +15,10 @@ class Nissan(Car, Vehicle):
         self.vehicle_type= vehicle_type
         self.price=  price
         self.horse_power= horse_power
-    def __str__(self):
-        return f'{self.vehicle_type}, {self.price}'
     def horse_powers(self):
-        return f'Базовая мощность: {super().horse_power} для Nissan: {self.horse_power}'
+        return f' мощность: {self.horse_power}'
+    def __str__(self):
+        return f'{self.vehicle_type}, {self.price}, {self.horse_powers()}'
 
 if __name__=='__main__':
     Auto= Nissan('Karina',50,25)
