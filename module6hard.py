@@ -21,11 +21,13 @@ class Figure:
     def __is_valid_sides(self, *args):
         if (len(args) == self.sides_count) or (isinstance(self,Cube) and len(args) == 1):
             for g in args:
-                if g<0 or type(g) != 'int':
+
+                if g<0 or not isinstance(g,int):
                     return False
+            return True
         else:
             return False
-        return True
+
     def set_sides(self, *args):
         if self.__is_valid_sides( *args):
             if isinstance(self,Cube):
@@ -35,7 +37,7 @@ class Figure:
                 for u in args:
                     self.__sides.append(u)
         else:
-            for i in range(1,self.sides_count):
+            for i in range(0,self.sides_count):
                 self.__sides.append(1)
     def __len__(self):
         perim= 0
